@@ -53,6 +53,6 @@ col.name <- gsub(pattern = "gravityacc", replacement = "gravity.acc", x = col.na
 tidy_data <- labeled_data
 names(tidy_data) <- col.name
 
-write_csv(x = tidy_data, path = "~/github/human-activity/data/tidy_data.csv", col_names = TRUE)
+write_csv(x = tidy_data, path = "~/github/human-activity/data/tidy/tidy_data.csv", col_names = TRUE)
 
 rm(train, test, features, activity_labels, col.name, vars)
