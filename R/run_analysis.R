@@ -4,3 +4,4 @@
 
 source('~/github/human-activity/R/data-gette.R')
 source('~/github/human-activity/R/data-cleane.R')
+source('~/github/human-activity/R/summarise.R')
