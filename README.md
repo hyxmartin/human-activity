@@ -20,18 +20,18 @@ The main contents of this repository, as required in the project instructions, a
 
 ## To do
 
-- [ ] Merge the training and the test sets to create one data set.
-- [ ] Extract only the measurements on the mean and standard deviation for each measurement.
-- [ ] Use descriptive activity names to name the activities in the data set
-- [ ] Appropriately label the data set with descriptive variable names.
+- [x] Merge the training and the test sets to create one data set.
+- [x] Extract only the measurements on the mean and standard deviation for each measurement.
+- [x] Use descriptive activity names to name the activities in the data set
+- [x] Appropriately label the data set with descriptive variable names.
 - [ ] From the data set in the previous step , create a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 
 ## Review criteria
-- [ ] The submitted data set is tidy.
-- [ ] The Github repo contains the required scripts.
-- [ ] GitHub contains a code book that modifies and updates the available codebooks with the data to indicate all the variables and summaries calculated, along with units, and any other relevant information.
-- [ ] The README that explains the analysis files is clear and understandable.
+- [x] The submitted data set is tidy.
+- [x] The Github repo contains the required scripts.
+- [ ] GitHub contains a code book that modifies and updates the available code books with the data to indicate all the variables and summaries calculated, along with units, and any other relevant information.
+- [x] The README that explains the analysis files is clear and understandable.
 - [ ] The work submitted for this project is the work of the student who submitted it.
 
 
