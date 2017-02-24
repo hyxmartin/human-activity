@@ -28,7 +28,7 @@ vars <-
 
 filtered_data <- raw_data[vars]
 
-## Use descriptive activity names to name the activities in the data set
+## Use descriptive activity names to name the activities in the data set.
 activity_labels <-
     read_table("~/github/human-activity/data/activity_labels.txt",
                col_names = c("id", "label"))
@@ -36,6 +36,23 @@ activity_labels <-
 labeled_data <-
     filtered_data %>% mutate(activity = factor(activity, labels = activity_labels$label))
 
+## Appropriately label the data set with descriptive variable names.
+col.name <- names(labeled_data) # get column names
 
+col.name <- tolower(col.name) # to lower case
+col.name <- gsub(pattern = "bodybody", replacement = "body", col.name) # delete apparent typo
+col.name <- gsub(pattern = "body", replacement = "body.", col.name) # separate body keyword by .
+col.name <- gsub(pattern = "^f", replacement = "freq.", x = col.name) # replace initial f by freq.
+col.name <- gsub(pattern = "^t", replacement = "time.", x = col.name) # replace initial t by time.
+col.name <- gsub(pattern = "(\\.+)", replacement = ".", x = col.name) # replace ... by .
+col.name <- gsub(pattern = "(\\.$)", replacement = "", x = col.name) # delete ending .
+col.name <- gsub(pattern = "gravitymean", replacement = "gravity.mean", x = col.name)
+col.name <- gsub(pattern = "gravityacc", replacement = "gravity.acc", x = col.name)
+
+## With the new variable names, we're ready to consider the data as tidy...
+tidy_data <- labeled_data
+names(tidy_data) <- col.name
+
+write_csv(x = tidy_data, path = "~/github/human-activity/data/tidy_data.csv", col_names = TRUE)
 
 rm(train, test, features, activity_labels, col.name, vars)
