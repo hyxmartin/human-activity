@@ -1,11 +1,14 @@
 # Human Activity Recognition Using Smartphones: Getting and Cleaning Data Course Project
 
-The purpose of this project is to showcase the knowledge and skills acquired in the [Getting and Cleaning Data Course by Johns Hopkins University at Coursera](https://www.coursera.org/learn/data-cleaning
-).
+The main purpose of this project is to showcase the knowledge and skills acquired in the [Getting and Cleaning Data Course by Johns Hopkins University at Coursera](https://www.coursera.org/learn/data-cleaning
+), as a part of the Data Science Specialization. 
+
+
+
 
 The main contents of this repository, as required in the project instructions, are:
 
-* The [tidy dataset](https://github.com/jclopeztavera/human-activity/blob/master/data/tidy_data.csv).
+* The [tidy dataset](https://github.com/jclopeztavera/human-activity/blob/master/data/tidy/tidy_data.csv).
 * The [R script](https://github.com/jclopeztavera/human-activity/blob/master/R/run_analysis.R) for performing the analyses.
 * The [codebook](https://github.com/jclopeztavera/human-activity/blob/master/R/CodeBook.md) that describes the variables, the data, and the data transformations performed.
 
@@ -14,7 +17,7 @@ The main contents of this repository, as required in the project instructions, a
 
 1. Clone this repository `git clone https://github.com/jclopeztavera/human-activity.git`.
 2. Open the [R-project file](https://github.com/jclopeztavera/human-activity/blob/master/human-activity.Rproj).
-3. Source the `run_analysis.R` file .
+3. Source the [`run_analysis.R`](https://github.com/jclopeztavera/human-activity/blob/master/R/run_analysis.R) file .
 4. Drop me a line if you find any areas for improvement.
 
 
@@ -24,16 +27,25 @@ The main contents of this repository, as required in the project instructions, a
 - [x] Extract only the measurements on the mean and standard deviation for each measurement.
 - [x] Use descriptive activity names to name the activities in the data set
 - [x] Appropriately label the data set with descriptive variable names.
-- [ ] From the data set in the previous step , create a second, independent tidy data set with the average of each variable for each activity and each subject.
-
+- [x] From the data set in the previous step , create a second, independent tidy data set with the average of each variable for each activity and each subject.
+- [ ] Make code book.
+- [ ] Submit assignment.
 
 ## Review criteria
+
 - [x] The submitted data set is tidy.
 - [x] The Github repo contains the required scripts.
 - [ ] GitHub contains a code book that modifies and updates the available code books with the data to indicate all the variables and summaries calculated, along with units, and any other relevant information.
 - [x] The README that explains the analysis files is clear and understandable.
 - [ ] The work submitted for this project is the work of the student who submitted it.
 
+
+## Next steps 
+
+- [ ] Read the [paper](http://arxiv.org/pdf/1401.8212.pdf) behind the data set.
+- [ ] Properly explore the data set, look at all variables and understand them.
+- [ ] Describe the data set in detail. 
+- [ ] Hands on ML: Train, test, and compare classification algorithms (besides the paper, you can read this [IPython Notebook](https://github.com/markdregan/K-Nearest-Neighbors-with-Dynamic-Time-Warping/blob/master/K_Nearest_Neighbor_Dynamic_Time_Warping.ipynb) by [Mark Regan](https://github.com/markdregan))
 
 ## Built With
 
