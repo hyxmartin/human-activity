@@ -1,0 +1,64 @@
+# Codebook
+Juan C. López-Tavera  
+2/26/2017  
+
+
+
+## Code book 
+
+This is the code book for the [UCI HAR Dataset](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones). It's intended to be a descriptive guide for future readers on how the data was obtained and processed step by step up to the the final tidy data set, and to provide information about the structure of the data set, its variables and units.
+
+## About the data
+
+The following information was taken entirely from the UCI HAR [dataset page](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones):
+
+>The Human Activity Recognition Using Smartphones Data Set is a database built from the recordings of 30 subjects performing activities of daily living (ADL) while carrying a waist-mounted smartphone with embedded inertial sensors. 
+>
+>Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained data set has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. 
+>
+>The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain.
+>
+>For each record in the data set it is provided: 
+>
+>* Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration. 
+>* Triaxial Angular velocity from the gyroscope. 
+>* A 561-feature vector with time and frequency domain variables. 
+>* Its activity label. 
+>* An identifier of the subject who carried out the experiment.
+>
+>Features are normalized and bounded within [-1,1]. Each feature vector is a row on the text file. The units used for the accelerations (total and body) are 'g's (gravity of earth -> 9.80665 m/seg2). The gyroscope units are rad/seg.
+
+
+### Raw data
+
+The original raw data files were downloaded from [this link](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip), provided in the "Peer-graded Assignment: Getting and Cleaning Data Course Project" Coursera page, although they can (should) be downloaded from the [original source](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones) 
+
+The raw data taken to process was structured as follows (based on the : 
+
+* [`features.txt`](https://github.com/jclopeztavera/human-activity/blob/master/data/features.txt): List of all features, which was used as column headers to name each variable (the names where later modified)
+* [`activity_labels.txt`](https://github.com/jclopeztavera/human-activity/blob/master/data/activity_labels.txt): Links the class labels with their activity name. This file was used to label each activity using the `factor()` R function.
+* [`train/X_train.txt`](https://github.com/jclopeztavera/human-activity/blob/master/data/train/X_train.txt): Training set, contains all the variables or features.
+* [`train/y_train.txt`](https://github.com/jclopeztavera/human-activity/blob/master/data/train/y_train.txt): Training labels, each row identifies an activity performed, its range is from 1 to 6. 
+* [`train/subject_train.txt`](https://github.com/jclopeztavera/human-activity/blob/master/data/train/subject_train.txt): Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30. 
+* [`test/X_test.txt`](https://github.com/jclopeztavera/human-activity/blob/master/data/test/X_test.txt): Test set, contains all the variables or features. 
+* [`test/y_test.txt`](https://github.com/jclopeztavera/human-activity/blob/master/data/test/y_test.txt): Test labels, each row identifies an activity performed, its range is from 1 to 6. 
+* [`test/subject_test.txt`](https://github.com/jclopeztavera/human-activity/blob/master/data/test/subject_test.txt): Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30.
+
+### Tidy data 
+
+
+## Data processing: from raw to tidy
+
+1. The raw data was manually downloaded from [this link](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip), and placed in the [data](https://github.com/jclopeztavera/human-activity/tree/master/data) folder (see the [Get data commit](https://github.com/jclopeztavera/human-activity/commit/15926197a500a618acc42a75872232131e6f09db?diff=unified)). 
+2. Two separate data sets were constructed using the original data files: test and train. This task was performed using the [`data-gette.R`](https://github.com/jclopeztavera/human-activity/blob/master/R/data-gette.R) script. 
+3. The train and test sets were merged to create one data set, using the `bind_rows`. This task was performed using the [`data-cleane.R`](https://github.com/jclopeztavera/human-activity/blob/master/R/data-cleane.R) script (line 9)
+4. The columns were renamed using the feature list provided in [`features.txt`](https://github.com/jclopeztavera/human-activity/blob/master/data/features.txt). This task was performed using the [`data-cleane.R`](https://github.com/jclopeztavera/human-activity/blob/master/R/data-cleane.R) script (lines 13-20)
+5. Extracted only the measurements on the mean and standard deviation for each measurement. This task was performed using the [`data-cleane.R`](https://github.com/jclopeztavera/human-activity/blob/master/R/data-cleane.R) script (lines 24-29)
+6. Used descriptive activity names to name the activities in the data set, using the activity descriptors provided in [`activity_labels.txt`](https://github.com/jclopeztavera/human-activity/blob/master/data/activity_labels.txt). This task was performed using the [`data-cleane.R`](https://github.com/jclopeztavera/human-activity/blob/master/R/data-cleane.R) script (lines 32-37)
+7. Appropriately labeled the data set with descriptive variable names, following the [R Style](https://google.github.io/styleguide/Rguide.xml#identifiers) convention on variable identifiers. This task was performed using the [`data-cleane.R`](https://github.com/jclopeztavera/human-activity/blob/master/R/data-cleane.R) script (lines 40-54)
+8. Created two descriptive tables that summarised the average values grouped [by activity](https://github.com/jclopeztavera/human-activity/blob/master/data/tidy/by_activity.csv) and [by subject](https://github.com/jclopeztavera/human-activity/blob/master/data/tidy/by_subject.csv). This task was performed using the [`summarise.R`](https://github.com/jclopeztavera/human-activity/blob/master/R/summarise.R) script. 
+
+To run all the analysis at once, including the generation of this code book, source the [`run_analysis.R`](https://github.com/jclopeztavera/human-activity/blob/master/R/run_analysis.R) script.
+
+## References 
+* Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
