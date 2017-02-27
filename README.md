@@ -1,16 +1,19 @@
 # Human Activity Recognition Using Smartphones: Getting and Cleaning Data Course Project
 
 The main purpose of this project is to showcase the knowledge and skills acquired in the [Getting and Cleaning Data Course by Johns Hopkins University at Coursera](https://www.coursera.org/learn/data-cleaning
-), as a part of the Data Science Specialization. 
+), as a part of the Data Science Specialization.
 
-
-
+The first goal of this repository is to contain the raw data, the code to get and clean them, the tidy data, and the code book. I am focusing on making all self-contained, self-evident and reproducible.
 
 The main contents of this repository, as required in the project instructions, are:
 
 * The [tidy dataset](https://github.com/jclopeztavera/human-activity/blob/master/data/tidy/tidy_data.csv).
-* The [R script](https://github.com/jclopeztavera/human-activity/blob/master/R/run_analysis.R) for performing the analyses.
-* The [codebook](https://github.com/jclopeztavera/human-activity/blob/master/R/CodeBook.md) that describes the variables, the data, and the data transformations performed.
+* The R script [`run_analysis.R`](https://github.com/jclopeztavera/human-activity/blob/master/R/run_analysis.R) for performing all the analyses. For more detail on each step taken:
+    * The R script for getting the data: [`data-gette.R`](https://github.com/jclopeztavera/human-activity/blob/master/R/data-gette.R)
+    * The R script for cleaning the data: [`data-cleane.R`](https://github.com/jclopeztavera/human-activity/blob/master/R/data-cleane.R)
+    * The R script for summarising the data: [`summarise.R`](https://github.com/jclopeztavera/human-activity/blob/master/R/summarise.R)
+* The [codebook](https://github.com/jclopeztavera/human-activity/blob/master/data/tidy/CodeBook.md) that describes the variables, the data, and the data transformations performed. For more detail on the making of the code book:
+    * The Rmarkdown file for knitting the codebook: [`CodeBook.Rmd`](https://github.com/jclopeztavera/human-activity/blob/master/data/tidy/CodeBook.Rmd)
 
 
 ## Usage
@@ -31,7 +34,7 @@ The main contents of this repository, as required in the project instructions, a
 - [ ] Make code book.
 - [ ] Submit assignment.
 
-## Review criteria
+### Review criteria
 
 - [x] The submitted data set is tidy.
 - [x] The Github repo contains the required scripts.
@@ -40,11 +43,11 @@ The main contents of this repository, as required in the project instructions, a
 - [ ] The work submitted for this project is the work of the student who submitted it.
 
 
-## Next steps 
+### Next steps
 
 - [ ] Read the [paper](http://arxiv.org/pdf/1401.8212.pdf) behind the data set.
 - [ ] Properly explore the data set, look at all variables and understand them.
-- [ ] Describe the data set in detail. 
+- [ ] Describe the data set in detail.
 - [ ] Hands on ML: Train, test, and compare classification algorithms (besides the paper, you can read this [IPython Notebook](https://github.com/markdregan/K-Nearest-Neighbors-with-Dynamic-Time-Warping/blob/master/K_Nearest_Neighbor_Dynamic_Time_Warping.ipynb) by [Mark Regan](https://github.com/markdregan))
 
 ## Built With
