@@ -8,51 +8,105 @@ source('~/github/human-activity/R/data-gette.R')
 ## Merge the training and the test sets to create one data set.
 raw_data <- bind_rows(train, test)
 
+rm(test, train) # tidy environment
 
-### renaming the column names using the feature list provided
-features <-
+## Extract only the measurements on the mean and standard deviation for each measurement
+
+### separate tidy variables (sub_act) and raw features for selection and tidying
+sub_act <- raw_data %>%
+    select(subject, activity)
+features <- raw_data %>%
+    select(-subject, -activity)
+
+### getting the feature names provided with the data set
+feature.names <-
     fread(input = "~/github/human-activity/data/features.txt",
           sep = "auto",
           col.names = c("id", "feature"))
-col.name <-
-    append(names(raw_data)[c(1, 2)], features$feature) %>% make.names # don't forget the first two variables: subject and label
 
-names(raw_data) <- col.name
+### logical vector for subsetting variables that contain either "mean" or "std"
+sub <- grepl(pattern = "(mean|std)", x = feature.names$feature)
 
+features <-
+    features[, sub] # subsetting "mean" and "std" from features
+feature.names <- feature.names[sub] # same for varaible names
 
-## Extract only the measurements on the mean and standard deviation for each measurement.
-vars <-
-    grepl(pattern = "subject|activity|mean|std",
-          x = col.name,
-          ignore.case = TRUE)
+names(features) <- feature.names$feature # assigning variable names
 
-filtered_data <- raw_data[vars]
+raw_data <-
+    bind_cols(sub_act, features) # merging label and features datasets
 
-## Use descriptive activity names to name the activities in the data set.
+rm(sub_act, features, sub, feature.names) # tidy environment
+
+## Appropriately label the data set with descriptive variable names
+raw_data <- raw_data %>%
+    gather(data = ., variable, value, -subject, -activity) %>%
+    separate(
+        col = variable,
+        into = c("signal", "parameter", "axis"),
+        convert = TRUE
+    )
+
+raw_data <- raw_data %>%
+    extract(
+        col = signal,
+        into = "domain",
+        regex = "^(t|f)",
+        remove = FALSE
+    ) %>%
+    extract(
+        col = signal,
+        into = "instrument",
+        regex = ("(Acc|Gyro)"),
+        remove = FALSE
+    ) %>%
+    extract(
+        col = signal,
+        into = "acceleration",
+        regex = ("(Body|Gravity)"),
+        remove = FALSE
+    ) %>%
+    extract(col = signal, into = "signal", regex = "(JerkMag|Jerk|Mag)")
+
+raw_data$domain <-
+    gsub(pattern = "t",
+         replacement = "time",
+         x = raw_data$domain)
+
+raw_data$domain <-
+    gsub(pattern = "f",
+         replacement = "frequency",
+         x = raw_data$domain)
+
+raw_data$instrument <-
+    gsub(pattern = "Acc",
+         replacement = "accelerometer",
+         x = raw_data$instrument)
+
+raw_data$instrument <-
+    gsub(pattern = "Gyro",
+         replacement = "gyroscope",
+         x = raw_data$instrument)
+
+## Using descriptive activity names to name the activities in the data set
 activity_labels <-
     read_table("~/github/human-activity/data/activity_labels.txt",
                col_names = c("id", "label"))
 
-labeled_data <-
-    filtered_data %>% mutate(activity = factor(activity, labels = activity_labels$label))
+tidy_data <- raw_data %>%
+    mutate(activity = factor(activity, labels = activity_labels$label))
 
-## Appropriately label the data set with descriptive variable names.
-col.name <- names(labeled_data) # get column names
+### final details
+tidy_data <- tidy_data %>%
+    mutate(
+        axis = replace(x = axis, which(axis == ""), NA),
+        parameter = replace(x = parameter, which(parameter == "meanfreq"), "mean")
+    )
 
-col.name <- tolower(col.name) # to lower case
-col.name <- gsub(pattern = "bodybody", replacement = "body", col.name) # delete apparent typo
-col.name <- gsub(pattern = "body", replacement = "body.", col.name) # separate body keyword by .
-col.name <- gsub(pattern = "^f", replacement = "freq.", x = col.name) # replace initial f by freq.
-col.name <- gsub(pattern = "^t", replacement = "time.", x = col.name) # replace initial t by time.
-col.name <- gsub(pattern = "(\\.+)", replacement = ".", x = col.name) # replace ... by .
-col.name <- gsub(pattern = "(\\.$)", replacement = "", x = col.name) # delete ending .
-col.name <- gsub(pattern = "gravitymean", replacement = "gravity.mean", x = col.name)
-col.name <- gsub(pattern = "gravityacc", replacement = "gravity.acc", x = col.name)
+tidy_data <- tidy_data %>%
+    mutate_if(is.character, tolower)
 
-## With the new variable names, we're ready to consider the data as tidy...
-tidy_data <- labeled_data
-names(tidy_data) <- col.name
+rm(activity_labels, raw_data) # tidy environment
 
-write_csv(x = tidy_data, path = "~/github/human-activity/data/tidy/tidy_data.csv", col_names = TRUE)
-
-rm(train, test, features, activity_labels, col.name, vars)
+## Export the tidy data-set
+write_csv(x = tidy_data, path = "~/github/human-activity/data/tidy/tidy_data.csv")

@@ -12,8 +12,8 @@ The main contents of this repository, as required in the project instructions, a
     * The R script for getting the data: [`data-gette.R`](https://github.com/jclopeztavera/human-activity/blob/master/R/data-gette.R)
     * The R script for cleaning the data: [`data-cleane.R`](https://github.com/jclopeztavera/human-activity/blob/master/R/data-cleane.R)
     * The R script for summarising the data: [`summarise.R`](https://github.com/jclopeztavera/human-activity/blob/master/R/summarise.R)
-* The [codebook](https://github.com/jclopeztavera/human-activity/blob/master/data/tidy/CodeBook.md) that describes the variables, the data, and the data transformations performed. For more detail on the making of the code book:
-    * The Rmarkdown file for knitting the codebook: [`CodeBook.Rmd`](https://github.com/jclopeztavera/human-activity/blob/master/data/tidy/CodeBook.Rmd)
+* The [codebook](https://github.com/jclopeztavera/human-activity/blob/master/CodeBook.md) that describes the variables, the data, and the data transformations performed. For more detail on the making of the code book:
+    * The Rmarkdown file for knitting the codebook: [`CodeBook.Rmd`](https://github.com/jclopeztavera/human-activity/blob/master/CodeBook.Rmd)
 
 
 ## Usage
