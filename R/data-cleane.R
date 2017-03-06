@@ -41,7 +41,11 @@ rm(sub_act, features, sub, feature.names) # tidy environment
 ## Appropriately label the data set with descriptive variable names
 raw_data <- raw_data %>%
     gather(data = ., variable, value, -subject, -activity) %>%
-    separate(variable, c("signal", "parameter", "axis"))
+    separate(
+        col = variable,
+        into = c("signal", "parameter", "axis"),
+        convert = TRUE
+    )
 
 raw_data <- raw_data %>%
     extract(
@@ -91,6 +95,16 @@ activity_labels <-
 
 tidy_data <- raw_data %>%
     mutate(activity = factor(activity, labels = activity_labels$label))
+
+### final details
+tidy_data <- tidy_data %>%
+    mutate(
+        axis = replace(x = axis, which(axis == ""), NA),
+        parameter = replace(x = parameter, which(parameter == "meanfreq"), "mean")
+    )
+
+tidy_data <- tidy_data %>%
+    mutate_if(is.character, tolower)
 
 rm(activity_labels, raw_data) # tidy environment
 
