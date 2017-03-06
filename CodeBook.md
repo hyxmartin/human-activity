@@ -7,16 +7,7 @@ output:
     keep_md: yes
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
 
-library(dplyr)
-library(data.table)
-library(knitr)
-
-tidy_data <- fread("~/github/human-activity/data/tidy/tidy_data.csv")
-
-```
 
 ## Code book
 
@@ -64,26 +55,24 @@ The [tidy data in this repository](https://github.com/jclopeztavera/human-activi
 
 >"Each variable is a column, each observation is a row, and each type of observational unit is a table." 
 
-The data set produced is a `r nrow(tidy_data)` row by `r ncol(tidy_data)` column data table stored in a [comma-separated values](https://en.wikipedia.org/wiki/Comma-separated_values) file: 
+The data set produced is a 813621 row by 9 column data table stored in a [comma-separated values](https://en.wikipedia.org/wiki/Comma-separated_values) file: 
 
 [`jclopeztavera/human-activity/data/tidy/tidy_data.csv`](https://github.com/jclopeztavera/human-activity/blob/master/data/tidy/tidy_data.csv) 
 
-The variables in the data set are: `r variable.names(tidy_data) %>% paste(collapse = ", ")`. In more detail, 
+The variables in the data set are: subject, activity, signal, acceleration, instrument, domain, parameter, axis, value. In more detail, 
 
-```{r, echo=FALSE}
 
-variables <-  variable.names(tidy_data)
-type <- sapply(X = tidy_data, class)
-uniques <- sapply(X = tidy_data, FUN = n_distinct)
-values <- c("Subject ID number", "Activities of daily living", "Jerk, magnitude or jerk magnitude", "Gravity or body", "Gyroscope or accelerometer", "Time or frequency", "Mean or standard deviation", "x, y, z", "i in [-1, 1]")
-
-descriptive <- cbind.data.frame(type, values, uniques)
-
-names(descriptive) <- c("Type", "Value", "Number of distinct values")
-
-kable(x = descriptive, format = "markdown", align = "l")
-
-```
+|             |Type      |Value                             |Number of distinct values |
+|:------------|:---------|:---------------------------------|:-------------------------|
+|subject      |integer   |Subject ID number                 |30                        |
+|activity     |character |Activities of daily living        |6                         |
+|signal       |character |Jerk, magnitude or jerk magnitude |4                         |
+|acceleration |character |Gravity or body                   |2                         |
+|instrument   |character |Gyroscope or accelerometer        |2                         |
+|domain       |character |Time or frequency                 |2                         |
+|parameter    |character |Mean or standard deviation        |3                         |
+|axis         |character |x, y, z                           |4                         |
+|value        |numeric   |i in [-1, 1]                      |783226                    |
 
 The tidy data contains only the mean and standard deviation values for each feature, as required by the project criteria. All features are normalized and bounded within [-1,1]. Each feature vector is a row on the text file. The units used for the accelerations (total and body) are 'g's (gravity of earth -> 9.80665 m/seg2). The gyroscope units are rad/seg.
 

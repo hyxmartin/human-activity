@@ -168,6 +168,72 @@ $(document).ready(function () {
 <p>The data set produced is a 813621 row by 9 column data table stored in a <a href="https://en.wikipedia.org/wiki/Comma-separated_values">comma-separated values</a> file:</p>
 <p><a href="https://github.com/jclopeztavera/human-activity/blob/master/data/tidy/tidy_data.csv"><code>jclopeztavera/human-activity/data/tidy/tidy_data.csv</code></a></p>
 <p>The variables in the data set are: subject, activity, signal, acceleration, instrument, domain, parameter, axis, value. In more detail,</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Type</th>
+<th align="left">Value</th>
+<th align="left">Number of distinct values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">subject</td>
+<td align="left">integer</td>
+<td align="left">Subject ID number</td>
+<td align="left">30</td>
+</tr>
+<tr class="even">
+<td align="left">activity</td>
+<td align="left">character</td>
+<td align="left">Activities of daily living</td>
+<td align="left">6</td>
+</tr>
+<tr class="odd">
+<td align="left">signal</td>
+<td align="left">character</td>
+<td align="left">Jerk, magnitude or jerk magnitude</td>
+<td align="left">4</td>
+</tr>
+<tr class="even">
+<td align="left">acceleration</td>
+<td align="left">character</td>
+<td align="left">Gravity or body</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">instrument</td>
+<td align="left">character</td>
+<td align="left">Gyroscope or accelerometer</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">domain</td>
+<td align="left">character</td>
+<td align="left">Time or frequency</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">parameter</td>
+<td align="left">character</td>
+<td align="left">Mean or standard deviation</td>
+<td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left">axis</td>
+<td align="left">character</td>
+<td align="left">x, y, z</td>
+<td align="left">4</td>
+</tr>
+<tr class="odd">
+<td align="left">value</td>
+<td align="left">numeric</td>
+<td align="left">i in [-1, 1]</td>
+<td align="left">783226</td>
+</tr>
+</tbody>
+</table>
 <p>The tidy data contains only the mean and standard deviation values for each feature, as required by the project criteria. All features are normalized and bounded within [-1,1]. Each feature vector is a row on the text file. The units used for the accelerations (total and body) are ’g’s (gravity of earth -&gt; 9.80665 m/seg2). The gyroscope units are rad/seg.</p>
 </div>
 </div>
